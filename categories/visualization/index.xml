@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Visualization on Cool Data Stuff</title>
+    <link>https://danielabban.github.io/categories/visualization/</link>
+    <description>Recent content in Visualization on Cool Data Stuff</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 01 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://danielabban.github.io/categories/visualization/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Visualizing Data from HR</title>
+      <link>https://danielabban.github.io/2017/08/data-visualization-insight-from-hr-data/</link>
+      <pubDate>Tue, 01 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://danielabban.github.io/2017/08/data-visualization-insight-from-hr-data/</guid>
+      <description>Most companies would love to keep their valuable employees for a very long period of time, unfortunately this is not the case. Many employees walk off the door with very short or no notice, surpervisors are also not able to quickly anticipate these actions to revert them.
+If employers can anticipate employees desire to leave, they would be better prepared to curb any negative outcome it would have on the company.</description>
+    </item>
+    
+  </channel>
+</rss>
