@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://danielabban.github.io/2017/08/wordcloud-on-president-nana-akufo-addo-inaugural-speech/</loc>
+    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://danielabban.github.io/2017/08/data-visualization-insight-from-hr-data/</loc>
     <lastmod>2017-08-01T00:00:00+00:00</lastmod>
   </url>
@@ -40,7 +45,7 @@
   
   <url>
     <loc>https://danielabban.github.io/</loc>
-    <lastmod>2017-08-01T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -76,7 +81,7 @@
   
   <url>
     <loc>https://danielabban.github.io/post/</loc>
-    <lastmod>2017-08-01T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -111,8 +116,14 @@
   </url>
   
   <url>
+    <loc>https://danielabban.github.io/tags/visualization/</loc>
+    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://danielabban.github.io/categories/visualization/</loc>
-    <lastmod>2017-08-01T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

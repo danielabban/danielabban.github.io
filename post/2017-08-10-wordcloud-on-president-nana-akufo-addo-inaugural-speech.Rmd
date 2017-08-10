@@ -1,0 +1,64 @@
+---
+title: Word cloud on President Nana Akufo-Addo Inaugural Speech
+author: Daniel Abban
+date: '2017-08-10'
+slug: wordcloud-on-president-nana-akufo-addo-inaugural-speech
+categories: ["Visualization"]
+tags: ["Visualization"]
+---
+
+```{r, message=FALSE, echo=FALSE}
+
+library(tm)
+library("SnowballC")
+library("wordcloud")
+library(RColorBrewer)
+library(stringr)
+library(rvest)
+
+```
+The graphical image below clearly shows the most frequent words used by our seating President - Nana Akufu-Addo during  his inaugural speech on the 7th of January 2017
+
+The full speech can be found in the link below. I used an R program to scrape the speech from the web(myjoyonline.com) and wrote a function in R to create the word cloud. The full reproducible code can be found here
+```{r}
+url <- "http://www.myjoyonline.com/news/2017/January-7th/full-text-president-akufo-addos-inaugural-speech.php"
+```
+
+```{r, echo=FALSE}
+speech <- read_html(url)
+
+speech_data <- html_nodes(speech, css = "p") %>%
+  html_text()
+
+speech_data <- speech_data[-c(1:4)]
+
+make_word_cloud <- function(documents) {
+  corpus = Corpus(VectorSource(tolower(documents)))
+  corpus = tm_map(corpus, removePunctuation)
+  corpus = tm_map(corpus, removeNumbers)
+  corpus = tm_map(corpus, removeWords, c(stopwords("english"), "will"))
+  
+  frequencies = DocumentTermMatrix(corpus)
+  word_frequencies = as.data.frame(as.matrix(frequencies))
+  
+  words <- colnames(word_frequencies)
+  freq <- colSums(word_frequencies)
+  wordcloud(words, freq,
+            min.freq=sort(freq, decreasing=TRUE)[[200]],
+            colors=brewer.pal(8, "Dark2"),
+            random.color=FALSE,
+            random.order = FALSE,
+            rot.per = .2,
+            scale=c(4,.1))  
+}
+
+make_word_cloud(speech_data)
+```
+
+There are many interesting benefits and applications of word clouds. But one that excites me the most is how some businesses use it to display their vision and mission statement to both their employees and customers. I believe such a pictorial view of one's vision can increase motivation and promote the right attitude in the organization.
+
+See you soon with some more cool data stuff
+
+
+
+
