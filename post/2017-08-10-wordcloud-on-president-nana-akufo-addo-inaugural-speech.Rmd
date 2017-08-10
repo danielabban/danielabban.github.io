@@ -1,5 +1,5 @@
 ---
-title: Word cloud on President Nana Akufo-Addo Inaugural Speech
+title: Word cloud on President Nana Akufo-Addo's Inaugural Speech
 author: Daniel Abban
 date: '2017-08-10'
 slug: wordcloud-on-president-nana-akufo-addo-inaugural-speech
