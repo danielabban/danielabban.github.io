@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Cool Data Stuff</title>
+    <link>/tags/python/</link>
+    <description>Recent content in Python on Cool Data Stuff</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>quora question</title>
+      <link>/2017/08/quora-question/</link>
+      <pubDate>Wed, 23 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/08/quora-question/</guid>
+      <description>Identifying Questions Pairs with Same Intent At Quora, an important product principle is that there should be a single question page for each logically distinct question. For example, the queries “What is the most populous state in the USA?” and “Which state in the United States has the most people?” should not exist separately on Quora because the intent behind both is identical. We are provided with a list of question pairs and our task is to identify duplicate questions based on previous results.</description>
+    </item>
+    
+  </channel>
+</rss>

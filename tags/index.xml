@@ -2,84 +2,84 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Cool Data Stuff</title>
-    <link>https://danielabban.github.io/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on Cool Data Stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 01 Aug 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://danielabban.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title></title>
-      <link>https://danielabban.github.io/tags/</link>
+      <link>/tags/</link>
       <pubDate>Tue, 01 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://danielabban.github.io/tags/</guid>
+      <guid>/tags/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Cover Image</title>
-      <link>https://danielabban.github.io/tags/cover-image/</link>
+      <link>/tags/cover-image/</link>
       <pubDate>Wed, 13 May 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://danielabban.github.io/tags/cover-image/</guid>
+      <guid>/tags/cover-image/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Html Elements</title>
-      <link>https://danielabban.github.io/tags/html-elements/</link>
+      <link>/tags/html-elements/</link>
       <pubDate>Thu, 28 May 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://danielabban.github.io/tags/html-elements/</guid>
+      <guid>/tags/html-elements/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Markdown</title>
-      <link>https://danielabban.github.io/tags/markdown/</link>
+      <link>/tags/markdown/</link>
       <pubDate>Thu, 28 May 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://danielabban.github.io/tags/markdown/</guid>
+      <guid>/tags/markdown/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Plot</title>
-      <link>https://danielabban.github.io/tags/plot/</link>
+      <link>/tags/plot/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
       
-      <guid>https://danielabban.github.io/tags/plot/</guid>
+      <guid>/tags/plot/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R Markdown</title>
-      <link>https://danielabban.github.io/tags/r-markdown/</link>
+      <link>/tags/r-markdown/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
       
-      <guid>https://danielabban.github.io/tags/r-markdown/</guid>
+      <guid>/tags/r-markdown/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Regression</title>
-      <link>https://danielabban.github.io/tags/regression/</link>
+      <link>/tags/regression/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
       
-      <guid>https://danielabban.github.io/tags/regression/</guid>
+      <guid>/tags/regression/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Visualization</title>
-      <link>https://danielabban.github.io/tags/visualization/</link>
+      <link>/tags/visualization/</link>
       <pubDate>Thu, 10 Aug 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://danielabban.github.io/tags/visualization/</guid>
+      <guid>/tags/visualization/</guid>
       <description></description>
     </item>
     
