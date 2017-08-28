@@ -1,0 +1,335 @@
+---
+title: Grocery Odering Prediction
+author: ~
+date: '2017-08-28'
+slug: grocery-odering-prediction
+categories: ["EDA"]
+tags: ["R"]
+---
+
+[Instacart](https://www.instacart.com/) - a grocery ordering and delivery app are aiming at making it easy to fill your storeroom and refrigirator with your favorites food, vegetables and fruits whenever you need them. After selecting products through the Instacart app, *personal shoppers* review your order and do the in-store shopping and delivery for you.
+ 
+Instacart is challenging the data science community to use this anonymized data on customer orders over time to **predict which previously purchased products will be in a user’s next order**.
+  
+## Data Description:
+
+The dataset for this competition is a relational set of files describing customers' orders over time. The dataset is anonymized and contains a sample of over 3 million grocery orders from more than 200,000 Instacart users. 
+
+For each user, we are provided between 4 and 100 of their orders, with the sequence of products purchased in each order. We are also provided the week and hour of day the order was placed, and a relative measure of time between orders.
+
+“The Instacart Online Grocery Shopping Dataset 2017” can be accessed from [https://www.instacart.com/datasets/grocery-shopping-2017](https://www.instacart.com/datasets/grocery-shopping-2017)
+
+
+## Project Goal:
+The goal of the competition is to **predict which products will be in a user's next order.** 
+The success of this project would enable Instacart to revolutionize how consumers discover and purchase groceries online.
+
+In this project, our focus would be on *exploratory analysis* designed to guide the modeling process
+
+Relax and enjoy!
+
+  
+```{r, message=FALSE, echo=FALSE}
+library(tidyverse)
+library(knitr)
+library(treemap)
+aisles <- read_csv("~/Desktop/market-basket/aisles.csv")
+departments <- read_csv("~/Desktop/market-basket/departments.csv")
+order_products_prior <- read_csv("~/Desktop/market-basket/order_products__prior.csv")
+#order_products_train <- read_csv("~/Desktop/market-basket/order_products__train.csv")
+orders <- read_csv("~/Desktop/market-basket/orders.csv")
+products <- read_csv("~/Desktop/market-basket/products.csv")
+```
+
+***
+
+First we take a look look at a few observations from our **products** datasets.
+
+***
+
+#### Products
+```{r echo=FALSE}
+kable(head(products,10))
+```
+
+
+## Data Exploration
+
+Since our interest is to predict the products that would be reordered, It'll be great to know the proportion of reordered observations in our dataset. 
+
+The distribution below highlights the proportion of products that were reordered. **1** signifies the products were reordered whereas **0** means the product was not reordered.
+
+```{r, echo=FALSE}
+order_products_prior$reordered <- as.factor(order_products_prior$reordered)
+ord <- table(order_products_prior$reordered)
+
+ggplot(order_products_prior, aes(reordered)) +
+  geom_bar(aes(y = (..count..)/sum(..count..)), fill = "skyblue", colour = "black") +
+   scale_y_continuous(labels=scales::percent) +
+  ylab("Percentage") + 
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+
+```
+
+From above: About 59% of all products in our database were reordered. A faily balanced dataset I suppose.
+
+*** 
+
+##### Which products had the highest orders?
+
+
+```{r, echo=FALSE, message=FALSE}
+top_ordered_products <- order_products_prior %>%
+                         group_by(product_id) %>%
+                         summarise(reorder_count = n()) %>%
+                         arrange(desc(reorder_count)) %>%
+                         top_n(10)
+
+top_ordered_products <- inner_join(top_ordered_products, products) %>%
+  select(product_name, reorder_count)
+
+```
+
+```{r, echo=FALSE}
+ggplot(top_ordered_products, aes(x = reorder(product_name, reorder_count), y = reorder_count)) +
+  geom_bar(stat = "identity", fill = "skyblue", colour = "black") +
+  coord_flip() +
+  ylab("count") +
+  xlab("Products") +
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+```
+
+*** 
+
+Banana is the most ordered products, Avocado and Limes also makes it to the top ordered products. That should be great for the stores I guess because bananas have a comparably lower shelve life
+
+***
+
+```{r, echo=FALSE}
+order_products_prior$reordered <- as.character(order_products_prior$reordered)
+order_products_prior$reordered <- as.numeric(order_products_prior$reordered)
+prop_product <-order_products_prior %>% 
+  group_by(product_id) %>% 
+  summarize(proportion_reordered = mean(reordered), n=n()) %>% 
+  arrange(desc(proportion_reordered)) %>%
+   left_join(products,by="product_id") %>%
+  select(product_name, proportion_reordered)
+#kable(prop_product[1:10, ])
+
+```
+
+***
+
+##### Which products are more likely to be re-ordered?
+
+Should we expect to see food with addictive substances having a higher score? 
+
+```{r, echo=FALSE}
+ggplot(prop_product[1:10, ], aes(reorder(product_name, proportion_reordered), proportion_reordered)) +
+  geom_count(show.legend = FALSE, fill = "blue") +
+  coord_flip() +
+  ylim(c(.89, .95)) +
+  xlab("Products") +
+  ylab("Probability of Reorder") +
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+
+```
+
+A consumer who purchases the above products have a very high probability of re-ordering the same products. True to my hypothesis, we find energy shots which are known to contain a high amount of caffeine present in the list. Also studies have shown chocolate have several substances that can make it feel addictive
+
+***
+
+##### Which day of week do customers make the most orders:
+
+```{r, echo=FALSE}
+orders$order_dow <- as.factor(orders$order_dow)
+orders$order_hour_of_day <- as.factor(orders$order_hour_of_day)
+```
+
+
+
+```{r, echo=FALSE}
+ggplot(orders, aes(order_dow)) +
+  geom_bar(fill = "skyblue", colour = "black") +
+  xlab("Day of Week") +
+  ylab("Count") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+```
+
+***
+
+Because the data was anonymized we cannot state with absolute certaninty but can safely assume that the high bars represents weekends. Saturdays and sundays are the most popular days for online shopping. I suppose because People would go to work on weekdays, they'll have less time shopping.
+
+***
+
+##### Which hour of the day does most orders occur?
+
+```{r, echo=FALSE}
+ggplot(orders, aes(order_hour_of_day)) +
+  geom_bar(fill = "skyblue", colour = "black") +
+  xlab("Hour of Day") +
+  ylab("Count") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+```
+
+***
+
+I think we can understand that consumers are more likely to shop during the day. Most folks sleep at night - unless you are a night watcher :-)
+
+***
+
+##### Which product are more likely to be ordered late at night?
+
+```{r, echo=FALSE, message=FALSE, fig.width=9}
+late_night <- orders %>%
+  filter(order_hour_of_day %in% c("22", "23")) %>%
+  select(order_id, order_hour_of_day) %>%
+  left_join(order_products_prior) %>%
+  select(product_id, reordered) %>%
+  group_by(product_id) %>%
+  summarise(probal = mean(reordered), count = n()) %>%
+  filter(count > 50) %>%
+  arrange(desc(probal)) %>%
+  left_join(products) %>%
+  select(product_name, probal)
+  
+
+```
+
+
+```{r, echo=FALSE}
+ggplot(late_night[1:15, ], aes(reorder(product_name, probal), probal)) +
+  geom_count(show.legend = FALSE) +
+  coord_flip() +
+  xlab("Products") +
+  ylab("Probalility") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+
+```
+
+***
+
+##### Which product are more likely to be ordered very early in the morning?
+
+```{r, echo=FALSE, message=FALSE, fig.width=9}
+early_morning <- orders %>%
+  filter(order_hour_of_day %in% c("01", "02", "03", "04")) %>%
+  select(order_id, order_hour_of_day) %>%
+  left_join(order_products_prior) %>%
+  select(product_id, reordered) %>%
+  group_by(product_id) %>%
+  summarise(probal = mean(reordered), count = n()) %>%
+  filter(count > 50) %>%
+  arrange(desc(probal)) %>%
+  left_join(products) %>%
+  select(product_name, probal)
+  
+```
+
+
+```{r, echo=FALSE}
+ggplot(early_morning[1:15, ], aes(reorder(product_name, probal), probal)) +
+  geom_count(show.legend = FALSE) +
+  coord_flip() +
+  xlab("Products") +
+  ylab("Probalility") +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"))
+```
+
+**Diary products** are more commonly ordered at night and early morning in comparison with the other products. I guess because they are often taken for breakfast
+
+##### Which aisle makes the most sales:
+
+```{r, echo=FALSE, message=FALSE}
+
+aisle_sales <- left_join(order_products_prior, products) %>%
+  select(aisle_id, product_name) %>%
+  left_join(aisles) %>%
+  group_by(aisle) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count))
+
+ggplot(aisle_sales[1:10, ], aes(reorder(aisle, count), count)) +
+  geom_bar(stat = "identity", fill = "skyblue", colour = "black") +
+  coord_flip() +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black")) +
+  xlab("Probability")
+
+```
+
+Fresh fruits and fresh vegetables makes the top of the list.
+
+***
+
+##### Which aisle gets the highest reorder?
+
+```{r, echo=FALSE, message=FALSE}
+aisle_prob <- left_join(order_products_prior, products) %>%
+  select(aisle_id, product_name, reordered) %>%
+  left_join(aisles) %>%
+  group_by(aisle) %>%
+  summarise(probal = mean(reordered), count = n()) %>%
+  filter(count > 10) %>%
+  arrange(desc(probal))
+
+```
+
+
+Again diary products and fresh fruits have a high probability to be reordered by customers who make a purchase
+
+
+```{r, echo=FALSE}
+ggplot(aisle_prob[1:10, ], aes(x = reorder(aisle, probal), y = probal)) +
+  geom_count(show.legend = FALSE) +
+  coord_flip() +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black")) +
+  xlab("Probability")
+```
+
+***
+
+Let's see how the aisle are distributed among the various departments. It appears the **personal care department** controls majority of the aisle but sell less products when compared to the produce department
+
+***
+
+```{r, fig.width=9, fig.height=6, echo=FALSE, message=FALSE}
+tmp2<- products %>%
+  group_by(aisle_id, department_id) %>%
+  summarise(count = n()) %>%
+  ungroup() %>% 
+  left_join(aisles) %>%
+  left_join(departments) %>%
+  group_by(department, aisle) %>%
+  summarise(count2 = n())
+
+treemap(tmp2, index = c("department", "aisle"), vSize = "count2", title="",palette="Set3",border.col="#FFFFFF")
+```
+
+***
+
+How many Products are sold within each department?
+
+```{r, fig.width=9, fig.height=6, echo=FALSE, message=FALSE}
+tmp3 <- order_products_prior %>%
+  group_by(product_id) %>%
+  summarise(count = n()) %>%
+  left_join(products) %>%
+  left_join(departments) %>%
+  left_join(aisles) %>%
+  group_by(department, aisle) %>%
+  summarise(count2 = sum(count))
+  
+treemap(tmp3, index = c("department", "aisle"), vSize = "count2", title="",palette="Set2",border.col="#FFFFFF")
+
+```
+
+The size of the boxes signifies the number of products sold in each department

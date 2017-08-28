@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.25.1">
     <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
-    <title>Visualizing Data from HR</title>
+    <title>Grocery Odering Prediction</title>
     <meta name="author" content="Daniel Abban">
     <meta name="keywords" content="">
 
@@ -31,18 +31,18 @@
     
 
     
-    <meta name="description" content="Most companies would love to keep their valuable employees for a very long period of time, unfortunately this is not the case. Many employees walk off the door with very short or no notice, surpervisors are also not able to quickly anticipate these actions to revert them.
-If employers can anticipate employees desire to leave, they would be better prepared to curb any negative outcome it would have on the company.">
-    <meta property="og:description" content="Most companies would love to keep their valuable employees for a very long period of time, unfortunately this is not the case. Many employees walk off the door with very short or no notice, surpervisors are also not able to quickly anticipate these actions to revert them.
-If employers can anticipate employees desire to leave, they would be better prepared to curb any negative outcome it would have on the company.">
+    <meta name="description" content="Instacart - a grocery ordering and delivery app are aiming at making it easy to fill your storeroom and refrigirator with your favorites food, vegetables and fruits whenever you need them. After selecting products through the Instacart app, personal shoppers review your order and do the in-store shopping and delivery for you.
+Instacart is challenging the data science community to use this anonymized data on customer orders over time to predict which previously purchased products will be in a user’s next order.">
+    <meta property="og:description" content="Instacart - a grocery ordering and delivery app are aiming at making it easy to fill your storeroom and refrigirator with your favorites food, vegetables and fruits whenever you need them. After selecting products through the Instacart app, personal shoppers review your order and do the in-store shopping and delivery for you.
+Instacart is challenging the data science community to use this anonymized data on customer orders over time to predict which previously purchased products will be in a user’s next order.">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Visualizing Data from HR">
-    <meta property="og:url" content="/2017/08/data-visualization-insight-from-hr-data/">
+    <meta property="og:title" content="Grocery Odering Prediction">
+    <meta property="og:url" content="/2017/08/grocery-odering-prediction/">
     <meta property="og:site_name" content="Cool Data Stuff">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Cool Data Stuff">
-    <meta name="twitter:description" content="Most companies would love to keep their valuable employees for a very long period of time, unfortunately this is not the case. Many employees walk off the door with very short or no notice, surpervisors are also not able to quickly anticipate these actions to revert them.
-If employers can anticipate employees desire to leave, they would be better prepared to curb any negative outcome it would have on the company.">
+    <meta name="twitter:description" content="Instacart - a grocery ordering and delivery app are aiming at making it easy to fill your storeroom and refrigirator with your favorites food, vegetables and fruits whenever you need them. After selecting products through the Instacart app, personal shoppers review your order and do the in-store shopping and delivery for you.
+Instacart is challenging the data science community to use this anonymized data on customer orders over time to predict which previously purchased products will be in a user’s next order.">
     
       <meta name="twitter:creator" content="@danabban">
     
@@ -216,14 +216,14 @@ ga('send', 'pageview');
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Visualizing Data from HR
+      Grocery Odering Prediction
     </h1>
   
   <div class="postShorten-meta post-meta">
   
-    <time itemprop="datePublished" datetime="2017-08-01T00:00:00Z">
+    <time itemprop="datePublished" datetime="2017-08-28T00:00:00Z">
       
-  August 1, 2017
+  August 28, 2017
 
     </time>
   
@@ -232,7 +232,7 @@ ga('send', 'pageview');
   
     <span>in</span>
     
-      <a class="category-link" href="https://danielabban.github.io/categories/visualization">Visualization</a>
+      <a class="category-link" href="https://danielabban.github.io/categories/eda">EDA</a>
     
   
 
@@ -243,241 +243,163 @@ ga('send', 'pageview');
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>Most companies would love to keep their valuable employees for a very long period of time, unfortunately this is not the case. Many employees walk off the door with very short or no notice, surpervisors are also not able to quickly anticipate these actions to revert them.</p>
-<p>If employers can anticipate employees desire to leave, they would be better prepared to curb any negative outcome it would have on the company.</p>
-<p>In this brief post we shall illustrate how to help a company reduce employee turn-over by providing valuable insight through visualization.</p>
-<p><strong>Problem Statement:</strong> The CEO of <em>ADD consulting</em> wants us to use their employee data to find out why and how people are leaving his company and also to make predictions on who would leave next.</p>
-<div id="project-goal." class="section level3">
-<h3>Project Goal.</h3>
-<ol style="list-style-type: decimal">
-<li>I seek to briefly demonstrate how questions are asked from data</li>
-<li>To illustrate how to present insights through visualizations</li>
-</ol>
-<hr />
+              <p><a href="https://www.instacart.com/">Instacart</a> - a grocery ordering and delivery app are aiming at making it easy to fill your storeroom and refrigirator with your favorites food, vegetables and fruits whenever you need them. After selecting products through the Instacart app, <em>personal shoppers</em> review your order and do the in-store shopping and delivery for you.</p>
+<p>Instacart is challenging the data science community to use this anonymized data on customer orders over time to <strong>predict which previously purchased products will be in a user’s next order</strong>.</p>
+<div id="data-description" class="section level2">
+<h2>Data Description:</h2>
+<p>The dataset for this competition is a relational set of files describing customers’ orders over time. The dataset is anonymized and contains a sample of over 3 million grocery orders from more than 200,000 Instacart users.</p>
+<p>For each user, we are provided between 4 and 100 of their orders, with the sequence of products purchased in each order. We are also provided the week and hour of day the order was placed, and a relative measure of time between orders.</p>
+<p>“The Instacart Online Grocery Shopping Dataset 2017” can be accessed from <a href="https://www.instacart.com/datasets/grocery-shopping-2017" class="uri">https://www.instacart.com/datasets/grocery-shopping-2017</a></p>
 </div>
-<div id="information-contained-in-the-data" class="section level3">
-<h3>Information Contained In The Data:</h3>
-<ol style="list-style-type: decimal">
-<li><p><strong>Satisfaction Level</strong>: The employee was asked to give a score on how happy he/she is in their current role</p></li>
-<li><p><strong>Last Evaluation</strong>: Recent work assessment from supervisors</p></li>
-<li><p><strong>Number of Projects</strong> A way of quantifying the job assigned to employees</p></li>
-<li><p><strong>Work accident</strong>: Indicates whether or not an employee had had an accident during work</p></li>
-<li><p><strong>promotion in 5 years</strong>: Indicates whether or not employee had a promotion in the last five years.</p></li>
-<li><p><strong>Department</strong>: Lists the various departmens in the company</p></li>
-<li><p><strong>Salary</strong>: shows the Income level of all employees</p></li>
-<li><p><strong>Time spent in the company</strong>: Number of years employee had been in the company</p></li>
-<li><p><strong>Average monthly hours</strong> Total hours worked per month</p></li>
-<li><p><strong>left</strong>: A label that tells who left or remained</p></li>
-</ol>
+<div id="project-goal" class="section level2">
+<h2>Project Goal:</h2>
+<p>The goal of the competition is to <strong>predict which products will be in a user’s next order.</strong> The success of this project would enable Instacart to revolutionize how consumers discover and purchase groceries online.</p>
+<p>In this project, our focus would be on <em>exploratory analysis</em> designed to guide the modeling process</p>
+<p>Relax and enjoy!</p>
 <hr />
-<p>So now we have the raw material to proceed with our analysis. The full reproducible code for this project is available <a href="https://github.com/danielabban/hr-analytics">here</a>. In this post i’ll briefly outline some data cleaning that was carried out on the data.</p>
-<ul>
-<li>I changed some dummy variables into more meaningful values.</li>
-<li>I splitted some numeric variables into three equal intervals</li>
-</ul>
+<p>First we take a look look at a few observations from our <strong>products</strong> datasets.</p>
+<hr />
+<div id="products" class="section level4">
+<h4>Products</h4>
 <table>
 <thead>
 <tr class="header">
-<th align="right">satisfaction_level</th>
-<th align="right">last_evaluation</th>
-<th align="right">number_project</th>
-<th align="right">average_montly_hours</th>
-<th align="right">time_spend_company</th>
-<th align="right">Work_accident</th>
-<th align="right">left</th>
-<th align="right">promotion_last_5years</th>
-<th align="left">sales</th>
-<th align="left">salary</th>
+<th align="right">product_id</th>
+<th align="left">product_name</th>
+<th align="right">aisle_id</th>
+<th align="right">department_id</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">0.38</td>
-<td align="right">0.53</td>
-<td align="right">2</td>
-<td align="right">157</td>
-<td align="right">3</td>
-<td align="right">0</td>
 <td align="right">1</td>
-<td align="right">0</td>
-<td align="left">sales</td>
-<td align="left">low</td>
+<td align="left">Chocolate Sandwich Cookies</td>
+<td align="right">61</td>
+<td align="right">19</td>
 </tr>
 <tr class="even">
-<td align="right">0.80</td>
-<td align="right">0.86</td>
-<td align="right">5</td>
-<td align="right">262</td>
-<td align="right">6</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="left">sales</td>
-<td align="left">medium</td>
+<td align="right">2</td>
+<td align="left">All-Seasons Salt</td>
+<td align="right">104</td>
+<td align="right">13</td>
 </tr>
 <tr class="odd">
-<td align="right">0.11</td>
-<td align="right">0.88</td>
+<td align="right">3</td>
+<td align="left">Robust Golden Unsweetened Oolong Tea</td>
+<td align="right">94</td>
 <td align="right">7</td>
-<td align="right">272</td>
+</tr>
+<tr class="even">
 <td align="right">4</td>
-<td align="right">0</td>
+<td align="left">Smart Ones Classic Favorites Mini Rigatoni With Vodka Cream Sauce</td>
+<td align="right">38</td>
 <td align="right">1</td>
-<td align="right">0</td>
-<td align="left">sales</td>
-<td align="left">medium</td>
-</tr>
-<tr class="even">
-<td align="right">0.72</td>
-<td align="right">0.87</td>
-<td align="right">5</td>
-<td align="right">223</td>
-<td align="right">5</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="left">sales</td>
-<td align="left">low</td>
 </tr>
 <tr class="odd">
-<td align="right">0.37</td>
-<td align="right">0.52</td>
-<td align="right">2</td>
-<td align="right">159</td>
-<td align="right">3</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="left">sales</td>
-<td align="left">low</td>
+<td align="right">5</td>
+<td align="left">Green Chile Anytime Sauce</td>
+<td align="right">5</td>
+<td align="right">13</td>
 </tr>
 <tr class="even">
-<td align="right">0.41</td>
-<td align="right">0.50</td>
-<td align="right">2</td>
-<td align="right">153</td>
-<td align="right">3</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="left">sales</td>
-<td align="left">low</td>
-</tr>
-<tr class="odd">
-<td align="right">0.10</td>
-<td align="right">0.77</td>
 <td align="right">6</td>
-<td align="right">247</td>
-<td align="right">4</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="left">sales</td>
-<td align="left">low</td>
-</tr>
-<tr class="even">
-<td align="right">0.92</td>
-<td align="right">0.85</td>
-<td align="right">5</td>
-<td align="right">259</td>
-<td align="right">5</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="left">sales</td>
-<td align="left">low</td>
+<td align="left">Dry Nose Oil</td>
+<td align="right">11</td>
+<td align="right">11</td>
 </tr>
 <tr class="odd">
-<td align="right">0.89</td>
-<td align="right">1.00</td>
-<td align="right">5</td>
-<td align="right">224</td>
-<td align="right">5</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="left">sales</td>
-<td align="left">low</td>
+<td align="right">7</td>
+<td align="left">Pure Coconut Water With Orange</td>
+<td align="right">98</td>
+<td align="right">7</td>
 </tr>
 <tr class="even">
-<td align="right">0.42</td>
-<td align="right">0.53</td>
-<td align="right">2</td>
-<td align="right">142</td>
-<td align="right">3</td>
-<td align="right">0</td>
+<td align="right">8</td>
+<td align="left">Cut Russet Potatoes Steam N’ Mash</td>
+<td align="right">116</td>
 <td align="right">1</td>
-<td align="right">0</td>
-<td align="left">sales</td>
-<td align="left">low</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="left">Light Strawberry Blueberry Yogurt</td>
+<td align="right">120</td>
+<td align="right">16</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="left">Sparkling Orange Juice &amp; Prickly Pear Beverage</td>
+<td align="right">115</td>
+<td align="right">7</td>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>summary(hr_data)</code></pre>
-<pre><code>##        satisfaction_level last_evaluation  number_project
-##  disatisfied    :1941     Min.   :0.3600   2:2388        
-##  partly_satified:6760     1st Qu.:0.5600   3:4055        
-##  very_satisfied :6298     Median :0.7200   4:4365        
-##                           Mean   :0.7161   5:2761        
-##                           3rd Qu.:0.8700   6:1174        
-##                           Max.   :1.0000   7: 256        
-##                                                          
-##  average_montly_hours       time_spend_company Work_accident
-##  Min.   : 96.0        less_than_3    :9687     0:12830      
-##  1st Qu.:156.0        between 4 and 7:4936     1: 2169      
-##  Median :200.0        greater than 7 : 376                  
-##  Mean   :201.1                                              
-##  3rd Qu.:245.0                                              
-##  Max.   :310.0                                              
-##                                                             
-##      left        promotion_last_5years         sales         salary    
-##  stayed:12830   promoted    :14680     sales      :4140   low   :7316  
-##  left  : 2169   not_promoted:  319     technical  :2720   medium:6446  
-##                                        support    :2229   high  :1237  
-##                                        IT         :1227                
-##                                        product_mng: 902                
-##                                        marketing  : 858                
-##                                        (Other)    :2923</code></pre>
 </div>
-<div id="summary" class="section level3">
-<h3>Summary:</h3>
-<ol style="list-style-type: decimal">
-<li><p>About 14.5% of all staff in the data left</p></li>
-<li><p>About 2.13% had not been promoted for the past five years</p></li>
-<li><p>The average monthly hours of employee is 201.1</p></li>
-</ol>
-<hr />
-<p><strong>Why are people not happy with their job?</strong></p>
-<p>Remember we have a variable called <strong>“Satisfaction Level”</strong> - employees rank how happy they are in the company. I created three levels from that variable namely:</p>
-<ul>
-<li>dissatisfaction</li>
-<li>partly_satisfied</li>
-<li>very_satisfied</li>
-</ul>
-<p>Our focus in the next plot would be targeted towards the <em>dissatisfied group</em></p>
-<p><img src="https://danielabban.github.io/post/2017-08-08-data-visualization-insight-from-hr-data_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>Take a carefull look at the plot. What do you find? Majority of staff who claimed to be dissatisfied actually worked longer, some working as high as 300 hours a month.</p>
-<p>Questions you could still ask:</p>
-<ol style="list-style-type: decimal">
-<li>Why are they woking longer?</li>
-</ol>
-<p>Long hours at work may not mean much if it doesn’t translate into more projects being completed</p>
-<p>The next questions we seek to answer is: <strong>which group of employees completed more projects</strong></p>
-<hr />
-<p><img src="https://danielabban.github.io/post/2017-08-08-data-visualization-insight-from-hr-data_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p><em>For those employees who claim to be dissatisfied</em> - not only are they working longer but they seem to be completing more projects.</p>
-<hr />
-<p><strong>What is the reward for their extra effort?</strong>, We have to find out how well they are paid and also check if they have beeen promoted You could plot <em>satisfaction level</em> against <em>promotion in last 5 years</em></p>
-<p>Let’s move on and find out <strong>how many long serving employees we still have left</strong></p>
-<p><img src="https://danielabban.github.io/post/2017-08-08-data-visualization-insight-from-hr-data_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p>Very few employees stay longer than seven years and most of those employees are rewarded with higher positions</p>
-<p>Our final plot verifies this claim:</p>
-<p><img src="https://danielabban.github.io/post/2017-08-08-data-visualization-insight-from-hr-data_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
-<div id="conclusion" class="section level3">
-<h3>Conclusion</h3>
-<p>Data visualization helps with presenting data in a clear and intuitive manner. The systematic approach to asking questions from data and answering those questions with beautiful plots is very crucial to any data analytic project. The full reproducible code to this project can be downloaded <a href="https://github.com/danielabban/hr-analytics">here</a>.</p>
-<p>Thanks for taking time to read - See you soon with more cool data stuff!</p>
+<div id="data-exploration" class="section level2">
+<h2>Data Exploration</h2>
+<p>Since our interest is to predict the products that would be reordered, It’ll be great to know the proportion of reordered observations in our dataset.</p>
+<p>The distribution below highlights the proportion of products that were reordered. <strong>1</strong> signifies the products were reordered whereas <strong>0</strong> means the product was not reordered.</p>
+<p><img src="https://danielabban.github.io/post/2017-08-28-grocery-odering-prediction_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>From above: About 59% of all products in our database were reordered. A faily balanced dataset I suppose.</p>
+<hr />
+<div id="which-products-had-the-highest-orders" class="section level5">
+<h5>Which products had the highest orders?</h5>
+<p><img src="https://danielabban.github.io/post/2017-08-28-grocery-odering-prediction_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<hr />
+<p>Banana is the most ordered products, Avocado and Limes also makes it to the top ordered products. That should be great for the stores I guess because bananas have a comparably lower shelve life</p>
+<hr />
+<hr />
+</div>
+<div id="which-products-are-more-likely-to-be-re-ordered" class="section level5">
+<h5>Which products are more likely to be re-ordered?</h5>
+<p>Should we expect to see food with addictive substances having a higher score?</p>
+<p><img src="https://danielabban.github.io/post/2017-08-28-grocery-odering-prediction_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>A consumer who purchases the above products have a very high probability of re-ordering the same products. True to my hypothesis, we find energy shots which are known to contain a high amount of caffeine present in the list. Also studies have shown chocolate have several substances that can make it feel addictive</p>
+<hr />
+</div>
+<div id="which-day-of-week-do-customers-make-the-most-orders" class="section level5">
+<h5>Which day of week do customers make the most orders:</h5>
+<p><img src="https://danielabban.github.io/post/2017-08-28-grocery-odering-prediction_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<hr />
+<p>Because the data was anonymized we cannot state with absolute certaninty but can safely assume that the high bars represents weekends. Saturdays and sundays are the most popular days for online shopping. I suppose because People would go to work on weekdays, they’ll have less time shopping.</p>
+<hr />
+</div>
+<div id="which-hour-of-the-day-does-most-orders-occur" class="section level5">
+<h5>Which hour of the day does most orders occur?</h5>
+<p><img src="https://danielabban.github.io/post/2017-08-28-grocery-odering-prediction_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<hr />
+<p>I think we can understand that consumers are more likely to shop during the day. Most folks sleep at night - unless you are a night watcher :-)</p>
+<hr />
+</div>
+<div id="which-product-are-more-likely-to-be-ordered-late-at-night" class="section level5">
+<h5>Which product are more likely to be ordered late at night?</h5>
+<p><img src="https://danielabban.github.io/post/2017-08-28-grocery-odering-prediction_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<hr />
+</div>
+<div id="which-product-are-more-likely-to-be-ordered-very-early-in-the-morning" class="section level5">
+<h5>Which product are more likely to be ordered very early in the morning?</h5>
+<p><img src="https://danielabban.github.io/post/2017-08-28-grocery-odering-prediction_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><strong>Diary products</strong> are more commonly ordered at night and early morning in comparison with the other products. I guess because they are often taken for breakfast</p>
+</div>
+<div id="which-aisle-makes-the-most-sales" class="section level5">
+<h5>Which aisle makes the most sales:</h5>
+<p><img src="https://danielabban.github.io/post/2017-08-28-grocery-odering-prediction_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Fresh fruits and fresh vegetables makes the top of the list.</p>
+<hr />
+</div>
+<div id="which-aisle-gets-the-highest-reorder" class="section level5">
+<h5>Which aisle gets the highest reorder?</h5>
+<p>Again diary products and fresh fruits have a high probability to be reordered by customers who make a purchase</p>
+<p><img src="https://danielabban.github.io/post/2017-08-28-grocery-odering-prediction_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<hr />
+<p>Let’s see how the aisle are distributed among the various departments. It appears the <strong>personal care department</strong> controls majority of the aisle but sell less products when compared to the produce department</p>
+<hr />
+<p><img src="https://danielabban.github.io/post/2017-08-28-grocery-odering-prediction_files/figure-html/unnamed-chunk-18-1.png" width="864" /></p>
+<hr />
+<p>How many Products are sold within each department?</p>
+<p><img src="https://danielabban.github.io/post/2017-08-28-grocery-odering-prediction_files/figure-html/unnamed-chunk-19-1.png" width="864" /></p>
+<p>The size of the boxes signifies the number of products sold in each department</p>
+</div>
 </div>
 
               
@@ -491,7 +413,7 @@ ga('send', 'pageview');
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://danielabban.github.io//tags//"></a>
+  <a class="tag tag--primary tag--small" href="https://danielabban.github.io//tags/r/">R</a>
 
                   </div>
                 
@@ -503,7 +425,7 @@ ga('send', 'pageview');
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://danielabban.github.io/2017/08/wordcloud-on-president-nana-akufo-addo-inaugural-speech/" data-tooltip="Word cloud on President Nana Akufo-Addo&#39;s Inaugural Speech">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -511,7 +433,7 @@ ga('send', 'pageview');
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://danielabban.github.io/2015/07/hello-r-markdown/" data-tooltip="Hello R Markdown">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://danielabban.github.io/2017/08/wordcloud-on-president-nana-akufo-addo-inaugural-speech/" data-tooltip="Word cloud on President Nana Akufo-Addo&#39;s Inaugural Speech">
           
             <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
             <i class="fa fa-angle-right"></i>
@@ -528,17 +450,17 @@ ga('send', 'pageview');
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fdata-visualization-insight-from-hr-data%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fgrocery-odering-prediction%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fdata-visualization-insight-from-hr-data%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fgrocery-odering-prediction%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fdata-visualization-insight-from-hr-data%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fgrocery-odering-prediction%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -584,7 +506,7 @@ ga('send', 'pageview');
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://danielabban.github.io/2017/08/wordcloud-on-president-nana-akufo-addo-inaugural-speech/" data-tooltip="Word cloud on President Nana Akufo-Addo&#39;s Inaugural Speech">
+            <a class="post-action-btn btn btn--disabled">
           
             <i class="fa fa-angle-left"></i>
             <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -592,7 +514,7 @@ ga('send', 'pageview');
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://danielabban.github.io/2015/07/hello-r-markdown/" data-tooltip="Hello R Markdown">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://danielabban.github.io/2017/08/wordcloud-on-president-nana-akufo-addo-inaugural-speech/" data-tooltip="Word cloud on President Nana Akufo-Addo&#39;s Inaugural Speech">
           
             <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
             <i class="fa fa-angle-right"></i>
@@ -609,17 +531,17 @@ ga('send', 'pageview');
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fdata-visualization-insight-from-hr-data%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fgrocery-odering-prediction%2f">
           <i class="fa fa-google-plus"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fdata-visualization-insight-from-hr-data%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fgrocery-odering-prediction%2f">
           <i class="fa fa-facebook-official"></i>
         </a>
       </li>
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fdata-visualization-insight-from-hr-data%2f">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fgrocery-odering-prediction%2f">
           <i class="fa fa-twitter"></i>
         </a>
       </li>
@@ -646,17 +568,17 @@ ga('send', 'pageview');
       <div id="share-options-bar" class="share-options-bar" data-behavior="4">
   <ul class="share-options">
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fdata-visualization-insight-from-hr-data%2f">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fgrocery-odering-prediction%2f">
         <i class="fa fa-google-plus"></i><span>Share on Google Plus</span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fdata-visualization-insight-from-hr-data%2f">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fgrocery-odering-prediction%2f">
         <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
       </a>
     </li>
     <li class="share-option">
-      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fdata-visualization-insight-from-hr-data%2f">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdanielabban.github.io%2f2017%2f08%2fgrocery-odering-prediction%2f">
         <i class="fa fa-twitter"></i><span>Share on Twitter</span>
       </a>
     </li>
@@ -890,9 +812,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/danielabban.github.io\/2017\/08\/data-visualization-insight-from-hr-data\/';
+          this.page.url = 'https:\/\/danielabban.github.io\/2017\/08\/grocery-odering-prediction\/';
           
-            this.page.identifier = '\/2017\/08\/data-visualization-insight-from-hr-data\/'
+            this.page.identifier = '\/2017\/08\/grocery-odering-prediction\/'
           
         };
         (function() {

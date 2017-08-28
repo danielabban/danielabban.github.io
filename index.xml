@@ -6,10 +6,20 @@
     <description>Recent content on Cool Data Stuff</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 10 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Aug 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://danielabban.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Grocery Odering Prediction</title>
+      <link>https://danielabban.github.io/2017/08/grocery-odering-prediction/</link>
+      <pubDate>Mon, 28 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://danielabban.github.io/2017/08/grocery-odering-prediction/</guid>
+      <description>Instacart - a grocery ordering and delivery app are aiming at making it easy to fill your storeroom and refrigirator with your favorites food, vegetables and fruits whenever you need them. After selecting products through the Instacart app, personal shoppers review your order and do the in-store shopping and delivery for you.
+Instacart is challenging the data science community to use this anonymized data on customer orders over time to predict which previously purchased products will be in a user’s next order.</description>
+    </item>
     
     <item>
       <title>Word cloud on President Nana Akufo-Addo&#39;s Inaugural Speech</title>
