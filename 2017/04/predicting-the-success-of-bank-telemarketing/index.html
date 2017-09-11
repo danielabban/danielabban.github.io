@@ -1,0 +1,1194 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.25.1">
+    <meta name="theme" content="Tranquilpeak 0.3.1-BETA">
+    <title>Predicting the Success of Bank Telemarketing</title>
+    <meta name="author" content="Daniel Abban">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="https://danielabban.github.io/favicon.png">
+    
+
+    
+    <meta name="description" content="Introduction In this case study, we are going to explore the processes involved in a typical data mining task. When building a predictive model, there are some common problems you are likely to meet in your data - problems such as missing values, imbalanced classes, un-informative attributes and so on. Here we shall look at some proven techniques for dealing with such problems and many other important guidelines.
+We shall make an attempt to understand some functions that can make your life easier when working on projects in r">
+    <meta property="og:description" content="Introduction In this case study, we are going to explore the processes involved in a typical data mining task. When building a predictive model, there are some common problems you are likely to meet in your data - problems such as missing values, imbalanced classes, un-informative attributes and so on. Here we shall look at some proven techniques for dealing with such problems and many other important guidelines.
+We shall make an attempt to understand some functions that can make your life easier when working on projects in r">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Predicting the Success of Bank Telemarketing">
+    <meta property="og:url" content="/2017/04/predicting-the-success-of-bank-telemarketing/">
+    <meta property="og:site_name" content="Cool Data Stuff">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Cool Data Stuff">
+    <meta name="twitter:description" content="Introduction In this case study, we are going to explore the processes involved in a typical data mining task. When building a predictive model, there are some common problems you are likely to meet in your data - problems such as missing values, imbalanced classes, un-informative attributes and so on. Here we shall look at some proven techniques for dealing with such problems and many other important guidelines.
+We shall make an attempt to understand some functions that can make your life easier when working on projects in r">
+    
+      <meta name="twitter:creator" content="@danabban">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/46fd6c88483f8d5b7f603978bc7f45a9?s=640">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" />
+    
+    
+    <link rel="stylesheet" href="https://danielabban.github.io/css/style-u6mk0ojoywresbx8iepslrmmhl4stuhrsxuwhkpwrkrx7mryjcaimasnk4pi.min.css" />
+    
+    
+
+    
+      
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-103853990-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://danielabban.github.io/">Cool Data Stuff</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://danielabban.github.io/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/46fd6c88483f8d5b7f603978bc7f45a9?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://danielabban.github.io/#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/46fd6c88483f8d5b7f603978bc7f45a9?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Daniel Abban</h4>
+        
+          <h5 class="sidebar-profile-bio">I&rsquo;m a data scientist and enjoy doing really cool stuff with data</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://danielabban.github.io/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://danielabban.github.io/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://danielabban.github.io/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://danielabban.github.io/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://danielabban.github.io/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/danielabban" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://danielabban.github.io/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Predicting the Success of Bank Telemarketing
+    </h1>
+  
+  <div class="postShorten-meta post-meta">
+  
+    <time itemprop="datePublished" datetime="2017-04-11T00:00:00Z">
+      
+  April 11, 2017
+
+    </time>
+  
+  
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://danielabban.github.io/categories/model">Model</a>
+    
+  
+
+
+</div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>In this case study, we are going to explore the processes involved in a typical data mining task. When building a predictive model, there are some common problems you are likely to meet in your data - problems such as <em>missing values</em>, <em>imbalanced classes</em>, <em>un-informative attributes</em> and so on. Here we shall look at some proven techniques for dealing with such problems and many other important guidelines.</p>
+<p>We shall make an attempt to understand some functions that can make your life easier when working on projects in r</p>
+<p>I hope to provide a strong foundation for solving more challenging and complicated problems with data. If you are new to data science and are interested in learning, then I’ll encourage you to download the data in the link provided below and follow each step religiously.</p>
+</div>
+<div id="problem-discription-and-objectives" class="section level2">
+<h2>Problem Discription And Objectives</h2>
+<p>Financial Institutions such as Banks, Savings and Loans cooperation often provide cash investments services for their customers, one of such investment service is the <strong>term deposits</strong>. A term deposit is simply a cash investment held at a financial institution over a fixed amount of time. When a term deposit is purchased from a bank, the customer understands that the money can only be withdrawn after the term has ended or by giving a predetermined number of days notice.</p>
+<p>Now, these financial institutions need lot of customers to deposit money with them, the reason is because they use these deposits to do business and earn profits for their organization. When a customer deposits money, the bank would lend it out and make interest on it.</p>
+<p>A financial institution is launching a new marketing campaign and In order to minimize cost and optimize strategy, managment has decided to employ data scientist to leverage on their past data and target only the customers who would subscribe to their offer</p>
+<p>Looking at historical data on customers who have been targeted with similar products, we shall build a model to estimate how likely a customer would respond to this new offer.</p>
+<p>These case study walks us through an intelligent way of building a good model that would classify your customers appropriately</p>
+</div>
+<div id="data-description" class="section level2">
+<h2>Data Description</h2>
+<p>The data is related with direct marketing campaigns of a Portuguese banking institution. The marketing campaigns were based on phone calls. Often, more than one contact to the same client was required, in order to access if the product (bank term deposit) would be (‘yes’) or not (‘no’) subscribed.</p>
+<p>The data can be downloaded from the <a href="http://archive.ics.uci.edu/ml/machine-learning-databases/00222/">UCI Machine Learning Repostitory</a>. The classification goal is to predict if the client will subscribe a term deposit (variable y).</p>
+<div id="attribute-information" class="section level4">
+<h4>Attribute Information:</h4>
+<ul>
+<li>Age</li>
+<li>Job - type of job</li>
+<li>marital - marital status</li>
+<li>Education - Shows the level of education of each customer</li>
+<li>Default - Whether a customer has credit in default</li>
+<li>Housing - Does the customer have a housing loan?</li>
+<li>Loan - Does the customer have a personal loan?</li>
+<li>Contact - The contact communication type</li>
+<li>Month - Last contact month of year</li>
+<li>day_of_week - Last contact day of Week</li>
+<li>Duration - Last contact duration in seconds</li>
+<li>Campaign - Number of contact performed for the client during the campaign</li>
+<li>pdays: number of days that passed by after the client was last contacted from a previous campaign</li>
+<li>previous: number of contacts performed before this campaign and for this client</li>
+<li>poutcome: outcome of the previous marketing campaign</li>
+<li>emp.var.rate: employment variation rate - quarterly indicator</li>
+<li>cons.price.idx: consumer price index - monthly indicator</li>
+<li>cons.conf.idx: consumer confidence index - monthly indicator</li>
+<li>euribor3m: euribor 3 month rate - daily indicator</li>
+<li>nr.employed: number of employees - quarterly indicator</li>
+</ul>
+<p>The Output variable (Desired Target)</p>
+<ul>
+<li>y - has the client subscribed a term deposit? (binary: ‘yes’,‘no’)</li>
+</ul>
+</div>
+<div id="reading-the-data-into-r" class="section level3">
+<h3>Reading the Data into R</h3>
+<p>The data can be read directly from your browser through the link provided above, or you can download the data into your computer and follow the steps below to get it into R.</p>
+<p>readr comes with several functions for reading flat file data into R The advantage readr has over it’s equivalent base functions is it’s speed - readr is 10x faster than base r</p>
+<p>we use read_csv2 function to read our semicolon delimited file into R:</p>
+<pre class="r"><code># contains readr
+library(tidyverse)
+library(knitr)
+
+# Load Data
+raw_data &lt;- read_csv2(&quot;/home/dreamadmin/Desktop/bank/bank-additional-full.csv&quot;)
+#raw_data &lt;- bank_additional_full
+
+
+kable(head(raw_data))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">age</th>
+<th align="left">job</th>
+<th align="left">marital</th>
+<th align="left">education</th>
+<th align="left">default</th>
+<th align="left">housing</th>
+<th align="left">loan</th>
+<th align="left">contact</th>
+<th align="left">month</th>
+<th align="left">day_of_week</th>
+<th align="right">duration</th>
+<th align="right">campaign</th>
+<th align="right">pdays</th>
+<th align="right">previous</th>
+<th align="left">poutcome</th>
+<th align="right">emp.var.rate</th>
+<th align="right">cons.price.idx</th>
+<th align="right">cons.conf.idx</th>
+<th align="right">euribor3m</th>
+<th align="right">nr.employed</th>
+<th align="left">y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">56</td>
+<td align="left">housemaid</td>
+<td align="left">married</td>
+<td align="left">basic.4y</td>
+<td align="left">no</td>
+<td align="left">no</td>
+<td align="left">no</td>
+<td align="left">telephone</td>
+<td align="left">may</td>
+<td align="left">mon</td>
+<td align="right">261</td>
+<td align="right">1</td>
+<td align="right">999</td>
+<td align="right">0</td>
+<td align="left">nonexistent</td>
+<td align="right">11</td>
+<td align="right">93994</td>
+<td align="right">-364</td>
+<td align="right">4857</td>
+<td align="right">5191</td>
+<td align="left">no</td>
+</tr>
+<tr class="even">
+<td align="right">57</td>
+<td align="left">services</td>
+<td align="left">married</td>
+<td align="left">high.school</td>
+<td align="left">unknown</td>
+<td align="left">no</td>
+<td align="left">no</td>
+<td align="left">telephone</td>
+<td align="left">may</td>
+<td align="left">mon</td>
+<td align="right">149</td>
+<td align="right">1</td>
+<td align="right">999</td>
+<td align="right">0</td>
+<td align="left">nonexistent</td>
+<td align="right">11</td>
+<td align="right">93994</td>
+<td align="right">-364</td>
+<td align="right">4857</td>
+<td align="right">5191</td>
+<td align="left">no</td>
+</tr>
+<tr class="odd">
+<td align="right">37</td>
+<td align="left">services</td>
+<td align="left">married</td>
+<td align="left">high.school</td>
+<td align="left">no</td>
+<td align="left">yes</td>
+<td align="left">no</td>
+<td align="left">telephone</td>
+<td align="left">may</td>
+<td align="left">mon</td>
+<td align="right">226</td>
+<td align="right">1</td>
+<td align="right">999</td>
+<td align="right">0</td>
+<td align="left">nonexistent</td>
+<td align="right">11</td>
+<td align="right">93994</td>
+<td align="right">-364</td>
+<td align="right">4857</td>
+<td align="right">5191</td>
+<td align="left">no</td>
+</tr>
+<tr class="even">
+<td align="right">40</td>
+<td align="left">admin.</td>
+<td align="left">married</td>
+<td align="left">basic.6y</td>
+<td align="left">no</td>
+<td align="left">no</td>
+<td align="left">no</td>
+<td align="left">telephone</td>
+<td align="left">may</td>
+<td align="left">mon</td>
+<td align="right">151</td>
+<td align="right">1</td>
+<td align="right">999</td>
+<td align="right">0</td>
+<td align="left">nonexistent</td>
+<td align="right">11</td>
+<td align="right">93994</td>
+<td align="right">-364</td>
+<td align="right">4857</td>
+<td align="right">5191</td>
+<td align="left">no</td>
+</tr>
+<tr class="odd">
+<td align="right">56</td>
+<td align="left">services</td>
+<td align="left">married</td>
+<td align="left">high.school</td>
+<td align="left">no</td>
+<td align="left">no</td>
+<td align="left">yes</td>
+<td align="left">telephone</td>
+<td align="left">may</td>
+<td align="left">mon</td>
+<td align="right">307</td>
+<td align="right">1</td>
+<td align="right">999</td>
+<td align="right">0</td>
+<td align="left">nonexistent</td>
+<td align="right">11</td>
+<td align="right">93994</td>
+<td align="right">-364</td>
+<td align="right">4857</td>
+<td align="right">5191</td>
+<td align="left">no</td>
+</tr>
+<tr class="even">
+<td align="right">45</td>
+<td align="left">services</td>
+<td align="left">married</td>
+<td align="left">basic.9y</td>
+<td align="left">unknown</td>
+<td align="left">no</td>
+<td align="left">no</td>
+<td align="left">telephone</td>
+<td align="left">may</td>
+<td align="left">mon</td>
+<td align="right">198</td>
+<td align="right">1</td>
+<td align="right">999</td>
+<td align="right">0</td>
+<td align="left">nonexistent</td>
+<td align="right">11</td>
+<td align="right">93994</td>
+<td align="right">-364</td>
+<td align="right">4857</td>
+<td align="right">5191</td>
+<td align="left">no</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="summarizing-the-data" class="section level3">
+<h3>Summarizing the Data</h3>
+<p>Once you have imported your data, the next step I’ll recommend is to calculate a set of summary statistics on it. Summarizing your data is very useful because it kind of reduces your bulk data into something you can understand and interpret</p>
+<p>What to look out for when summarizing your data includes: mean, median inter-quatile range, count of values and so on. The dim() function also displays the dimension of the dataset, in this dataset, we have 41188 instances and 21 attributes. Below are some basic functions in R, that provide you with a range of descriptive statistics at once.</p>
+<pre class="r"><code># glimpse(raw_data)
+
+summary(raw_data)
+
+dim(raw_data)</code></pre>
+<div id="create-two-data-frames-from-your-data" class="section level4">
+<h4>Create two Data Frames from your Data</h4>
+<p>We shall divide our dataset into two - one for numerical variables and the other for categorical variables. This is a good option to consider when you are about exploring your data. You can easily identify problems that are peculiar to each type of vectors and iterate over each vector conveniently when solving those problems</p>
+<p>We used the map functions from the purr package - this functions are very useful for manipulating vectors. You can read more on the purr package by clicking <a href="https://blog.rstudio.org/2015/09/29/purrr-0-1-0/">here</a></p>
+<pre class="r"><code>num &lt;- map_lgl(raw_data, is.numeric)
+
+num_var &lt;- raw_data[, num]
+
+char_var &lt;- raw_data[, !num]
+
+# Add the target variable to the numeric variables 
+num_var &lt;- num_var %&gt;%
+        mutate(y = char_var$y)</code></pre>
+</div>
+</div>
+</div>
+<div id="visualize-the-data" class="section level2">
+<h2>Visualize the Data</h2>
+<p>Data Visualization helps you quickly spot surprises in your data. A good visualization makes complex data more understandable.</p>
+<p>An Histogram is typically used to visualize the distribution of a numeric variable whereas the bar graphs are used for the categorical variables. In both bar charts and histograms, tall bars show the common values of a variable, and shorter bars show less-common values. You should always explore a variety of binwidths when working with histograms, as different binwidths can reveal different patterns.</p>
+<pre class="r"><code>ggplot(num_var, aes(x = age)) +
+        geom_histogram(fill = &quot;skyblue&quot;, color = &quot;black&quot;) +
+  theme_bw()</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="https://danielabban.github.io/post/2017-09-11-predicting-the-success-of-bank-telemarketing_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>To avoid copying and pasting the code. I have written a function for plotting the histograms on each numeric variable</p>
+<pre class="r"><code>plot_hist &lt;- function(x, bins = 40){
+        ggplot(num_var, aes(x = x)) +
+                geom_histogram(fill = &quot;white&quot;, color = &quot;black&quot;,
+                               bins = bins)
+        
+plot_hist(num_var$duration, bins = 100)
+
+}</code></pre>
+<p>Important note: this attribute (duration) highly affects the output target (e.g., if duration=0 then y=‘no’). Yet, the duration is not known before a call is performed, also the end of the call y is obviously known. Thus, this input should only be included for benchmark purposes and should be discarded if the intention is to have a realistic predictive model.</p>
+<pre class="r"><code>ggplot(num_var, aes(x = y, y = duration)) +
+        geom_boxplot() +
+  theme_bw()</code></pre>
+<p><img src="https://danielabban.github.io/post/2017-09-11-predicting-the-success-of-bank-telemarketing_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(char_var, aes(job, fill = y)) +
+        geom_bar(position = &quot;dodge&quot;, color = &quot;black&quot;) +
+        scale_fill_brewer(palette = &quot;Pastel1&quot;) +
+        theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  theme_bw()</code></pre>
+<p><img src="https://danielabban.github.io/post/2017-09-11-predicting-the-success-of-bank-telemarketing_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>I’ll write a function to plot the categorical variables. Functions prevents unecessary duplication in your codes.</p>
+<pre class="r"><code>plot_char &lt;- function(x){
+        ggplot(char_var, aes(x, fill = y)) +
+                geom_bar(position = &quot;dodge&quot;, color = &quot;black&quot;) +
+                scale_fill_brewer(palette = &quot;Pastel1&quot;) +
+                        theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+}
+
+
+plot_char(char_var$education)</code></pre>
+<p><img src="https://danielabban.github.io/post/2017-09-11-predicting-the-success-of-bank-telemarketing_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<hr />
+</div>
+<div id="data-transformation" class="section level2">
+<h2>Data Transformation:</h2>
+<p>A very important aspect of data science is getting the data in the right form for analysis. Very few data can be considered perfect. We look at some ways to get our data into the right format in order to achieve optimal results</p>
+<div id="dealing-with-missing-values" class="section level4">
+<h4>Dealing with Missing Values</h4>
+<p>The presence of missing data is a common problem you see on real datasets. When dealing with missing values, we should first and foremost find out if the pattern of the missing data is related to the outcome. Missing values may be concentrated in a subset of predictors or could occur randomly accross all the predictors. In many cases it is ideal to remove a predictor if the proportion of missing values in it is very high.</p>
+<p>i found that 33425 values were missing from the nr.employed variable. That represent 81.1522774 percentage of missing values. Hence i removed this variable from subsequent modeling activities. We use a function from the dplyr package - select() - which allows you to rapidly zoom in on a useful subset of columns</p>
+<pre class="r"><code>map_dbl(num_var, function(x)sum(is.na(x)))</code></pre>
+<pre><code>##            age       duration       campaign          pdays       previous 
+##              0              0              0              0              0 
+##   emp.var.rate cons.price.idx  cons.conf.idx      euribor3m    nr.employed 
+##              0              0              0              0          33425 
+##              y 
+##              0</code></pre>
+<pre class="r"><code>num_var &lt;- select(num_var, -nr.employed)</code></pre>
+</div>
+<div id="condence-low-frequency-character-values" class="section level4">
+<h4>Condence low frequency character values</h4>
+<p>From our exploratory graphs, we observe that many of the attributes (categorical variables), have levels with very low frequenies. Since the purpose of the model is to find patterns in the data that can generalize to an unseen data - levels with low frequency are better combined together. This is because those low frequency levels may not be present in the test data.</p>
+<p>I wrote a function below to combine levels having a frequency less that 2% of the values in the data. The map funtion below loops over the character variables and generate result that have low frequency levels combined</p>
+<pre class="r"><code>combine_levels &lt;- function(x, threshold = 0.02) {
+  lowLevels &lt;- names(which(prop.table(table(x)) &lt; 0.02))
+  x[x %in% lowLevels] &lt;- &quot;other&quot;
+  x
+}
+
+char_var &lt;- map_df(char_var, combine_levels)
+
+
+# make categorical variable factors
+conv_to_factors &lt;- function(x){
+        as.factor(x)
+}
+
+
+fac_var &lt;- map_df(char_var, conv_to_factors)
+
+
+# Convert some low variance numeric variables to categorical
+# and condense levels with values less than 5%
+
+num_var$pdays &lt;- ifelse(num_var$pdays == 999, &quot;not_contacted&quot;, &quot;contacted&quot;)
+num_var$pdays &lt;- combine_levels(num_var$pdays)
+num_var$pdays &lt;- conv_to_factors(num_var$pdays)
+
+num_var$previous &lt;- as.character(num_var$previous)
+num_var$previous &lt;- combine_levels(num_var$previous)
+num_var$previous &lt;- conv_to_factors(num_var$previous)
+
+num_var$campaign &lt;- as.character(num_var$campaign)
+num_var$campaign &lt;- combine_levels(num_var$campaign)
+num_var$campaign &lt;- conv_to_factors(num_var$campaign)
+
+num_var &lt;- select(num_var, -duration, -y)</code></pre>
+</div>
+<div id="resolving-collinearity" class="section level3">
+<h3>Resolving collinearity</h3>
+<p>When predictors are correlated with other predictors in your data, then there is an issue of collinearity. Using highly correlated predictors in some modeling techniques can result in highly unstable models and produce poor predictive performance</p>
+<p>There is a function in the caret package that searches through a correlation matrix and points out columns to remove in order to reduce pair-wise correlations.</p>
+<pre class="r"><code>library(caret)
+library(corrplot)
+
+bank_data &lt;- cbind(num_var, fac_var)
+
+corMatrix &lt;- cor(bank_data[, c(1, 5:8)])
+
+# correlation plot
+corrplot(corMatrix, order = &quot;hclust&quot;, tl.cex = .65)</code></pre>
+<p><img src="https://danielabban.github.io/post/2017-09-11-predicting-the-success-of-bank-telemarketing_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="r"><code>highCor &lt;- findCorrelation(corMatrix, cutoff = .75)
+bank_data &lt;- bank_data[, -c(7:8)]</code></pre>
+</div>
+</div>
+<div id="obtaining-prediction-models" class="section level2">
+<h2>Obtaining Prediction Models</h2>
+<p>The main goal of this case study is to predict whether or not a client would subscribe a term deposit from a banking institution. We’ll simply use our data and some machine learning techniques to identify the customers who purchased the term deposit.</p>
+<blockquote>
+<p>In general, machine learning is about learning to do better in the future based on experience from the past.</p>
+</blockquote>
+<p>The focus is to provide high-level predictions that guide better decisions without human interventions.</p>
+<div id="partition-your-data-into-training-and-test-set." class="section level4">
+<h4>Partition your data into training and test set.</h4>
+<p>One of the first decisions to make when modeling is to decide which samples will be used to evaluate your model’s performance. The <strong>training</strong> data set is the general term for the samples used to create the model, while the <strong>test</strong> set is what is used to measure performance</p>
+<p>With many data science applications - like the one we are working on right now, the proportion of the classes are substantially different therefore when splitting your data into a training and a test set, take that into account. <strong>caret</strong> provides a function that splits the data using <strong>stratified random sampling</strong>, which takes into account the difference in classes</p>
+<pre class="r"><code>outcome &lt;- bank_data$y
+
+predictors &lt;- select(bank_data, -y)
+
+
+# partition data:
+
+idx &lt;- createDataPartition(outcome, p = 2/3,
+                           list = FALSE)
+
+predictors_train &lt;- predictors[idx, ]
+outcome_train &lt;- outcome[idx]
+
+predictors_test &lt;- predictors[-idx, ]
+outcome_test &lt;- outcome[-idx]</code></pre>
+</div>
+</div>
+<div id="resolving-class-imbalance" class="section level2">
+<h2>Resolving Class Imbalance</h2>
+<p>An imbalance occurs when one or more classes have very low proportion in the training data as compared to the other classes - this phenomenon can have a significant impact on the effectiveness of the model. For instance, in our data, the outcome - whether or not the customer purchased a term deposit, is highly unbalanced with only 11% of customers having purchased a term deposit. <code>89, 11</code>.</p>
+<p>There are two general approaches that can be used to alleviate the effects of imbalance during model training. They are:</p>
+<ol style="list-style-type: decimal">
+<li><p>Up-sampling: this is a technique that imputes additional data points to improve balance across classes.</p></li>
+<li><p>Down-sampling: reduces the number of samples to improve the balance accross classes</p></li>
+</ol>
+<p>The synthetic minority over-sampling technique <strong>(SMOTE)</strong> is a data sampling procedure that uses both up-sampling and down-sampling, depending on the class. In this case study we applied SMOTE to the random forest model for the bank telemarketing data. A function for SMOTE can be found in the DMwR package.</p>
+<pre class="r"><code>library(DMwR)
+set.seed(10)
+smooth_data &lt;- SMOTE(y ~., data = bank_data)
+
+
+outcome_train &lt;- smooth_data$y
+predictors_train &lt;- select(smooth_data, -y)
+
+
+round(prop.table(table(outcome_train))*100)</code></pre>
+<pre><code>## outcome_train
+##  no yes 
+##  57  43</code></pre>
+<p>We see the improvments in the proportion of class frequency after applying the SMOTE</p>
+<p>Almost all predictive modeling techniques have tuning parameters that enable the model to flex to find the structure in the data. We use resampling techniques, such as <strong>cross-validation</strong>, to choose the best parameters for optimal performance. Also, train can use standard resampling methods for estimating performance</p>
+<pre class="r"><code>ctrl &lt;- trainControl(method = &quot;cv&quot;,
+                     summaryFunction = twoClassSummary,
+                     classProbs = TRUE)</code></pre>
+<p>We shall build our model using random forest. You can read about random forest from <a href="https://en.wikipedia.org/wiki/Random_forest">Wikipedia</a>. The train function contains wrappers for tuning the random forest models by specifying either method = “rf”. Optimizing the mtry parameter may result in a slight increase in performance.</p>
+<pre class="r"><code>rfFit &lt;- train(x = predictors_train, 
+               y = outcome_train,
+               method = &quot;rf&quot;,
+               ntree = 500,
+               importance = TRUE,
+               metric = &quot;ROC&quot;,
+               trControl = ctrl)</code></pre>
+</div>
+<div id="measure-models-performance" class="section level2">
+<h2>Measure Models performance:</h2>
+<p>We shall use the ROC curve to qualify the performance of our model. A definition from wikipedia defines ROC curve thus:</p>
+<blockquote>
+<p>In statistics, a receiver operating characteristic (ROC), or ROC curve, is a graphical plot that illustrates the performance of a binary classifier system as its discrimination threshold is varied</p>
+</blockquote>
+<p>A perfect model that completely separates the two classes would have <strong>100%</strong> sensitivity and specificity.</p>
+<p><strong>Sensitivity</strong> is the accuracy rate for only the positive class, in this case customers who purchased the term deposit while <strong>specificity</strong> is the accuracy rate for the negative class - customers who did not purchase a term deposit</p>
+<p>One advantage of using ROC curves to characterize models is that, since it is a function of sensitivity and specificity, the curve is insensitive to disparities in the class proportions</p>
+<pre class="r"><code># Obtain test Result.
+testResult &lt;- predict(rfFit, predictors_test)
+
+confusionMatrix(outcome_test, testResult,
+                positive = &quot;yes&quot;)</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction    no   yes
+##        no  11552   630
+##        yes    47  1499
+##                                           
+##                Accuracy : 0.9507          
+##                  95% CI : (0.9469, 0.9542)
+##     No Information Rate : 0.8449          
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+##                                           
+##                   Kappa : 0.7881          
+##  Mcnemar&#39;s Test P-Value : &lt; 2.2e-16       
+##                                           
+##             Sensitivity : 0.7041          
+##             Specificity : 0.9959          
+##          Pos Pred Value : 0.9696          
+##          Neg Pred Value : 0.9483          
+##              Prevalence : 0.1551          
+##          Detection Rate : 0.1092          
+##    Detection Prevalence : 0.1126          
+##       Balanced Accuracy : 0.8500          
+##                                           
+##        &#39;Positive&#39; Class : yes             
+## </code></pre>
+<p>Our random forest model correctly predicted 70% of customers who purchased the term deposit and about 99.7% of customers who did not purchase the term deposit.</p>
+<div id="view-the-important-variables" class="section level4">
+<h4>View the important variables:</h4>
+<p>When training a tree, you can compute how much each feature decreases the weighted impurity in the tree. For a random forest, the impurity decrease from each feature can be averaged and the features are ranked according to this measure</p>
+<pre class="r"><code>varImpPlot(rfFit$finalModel,type=2, main = &quot;Dotchart of Variable Importance&quot;)</code></pre>
+<p><img src="https://danielabban.github.io/post/2017-09-11-predicting-the-success-of-bank-telemarketing_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>We may decide to remove the less important features from the set of predictors, re-build the model with the reduced features and check for improvements in performance.</p>
+</div>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>We were provided with an historical data of customers targeted during a marketing campaign from a banking instution and our goal was to build a classification model that would accurately predict which customers would subscribe a term deposit in a new marketing campaign</p>
+<p>We walked through the model building process and highlighted some peculiarities with the data. A unique feature of the data was that the classes were imbalanced, we studied a technique for solving the problem. We also learnt some functions in the caret package for building our model. Our accuracy on the event of interest was good and we pointed out ways to improve the model</p>
+<p>let me know your thoughts in the section below:</p>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://danielabban.github.io//tags/r/">R</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://danielabban.github.io/2017/08/data-visualization-insight-from-hr-data/" data-tooltip="Visualizing Data from HR">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://danielabban.github.io/2015/07/hello-r-markdown/" data-tooltip="Hello R Markdown">
+          
+            <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdanielabban.github.io%2f2017%2f04%2fpredicting-the-success-of-bank-telemarketing%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdanielabban.github.io%2f2017%2f04%2fpredicting-the-success-of-bank-telemarketing%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdanielabban.github.io%2f2017%2f04%2fpredicting-the-success-of-bank-telemarketing%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+      <li class="post-action">
+        <a class="post-action-btn btn btn--default" href="#disqus_thread">
+          <i class="fa fa-comment-o"></i>
+        </a>
+      </li>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2017 Daniel Abban. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://danielabban.github.io/2017/08/data-visualization-insight-from-hr-data/" data-tooltip="Visualizing Data from HR">
+          
+            <i class="fa fa-angle-left"></i>
+            <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+          </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://danielabban.github.io/2015/07/hello-r-markdown/" data-tooltip="Hello R Markdown">
+          
+            <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+            <i class="fa fa-angle-right"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdanielabban.github.io%2f2017%2f04%2fpredicting-the-success-of-bank-telemarketing%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdanielabban.github.io%2f2017%2f04%2fpredicting-the-success-of-bank-telemarketing%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdanielabban.github.io%2f2017%2f04%2fpredicting-the-success-of-bank-telemarketing%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+      <li class="post-action">
+        <a class="post-action-btn btn btn--default" href="#disqus_thread">
+          <i class="fa fa-comment-o"></i>
+        </a>
+      </li>
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <ul class="share-options">
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3a%2f%2fdanielabban.github.io%2f2017%2f04%2fpredicting-the-success-of-bank-telemarketing%2f">
+        <i class="fa fa-google-plus"></i><span>Share on Google Plus</span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fdanielabban.github.io%2f2017%2f04%2fpredicting-the-success-of-bank-telemarketing%2f">
+        <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdanielabban.github.io%2f2017%2f04%2fpredicting-the-success-of-bank-telemarketing%2f">
+        <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/46fd6c88483f8d5b7f603978bc7f45a9?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Daniel Abban</h4>
+    
+      <div id="about-card-bio">I&rsquo;m a data scientist and enjoy doing really cool stuff with data</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Data Scientist
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Ghana
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://danielabban.github.io/2017/08/grocery-odering-prediction/">
+                <h3 class="media-heading">Grocery Odering Prediction</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Instacart - a grocery ordering and delivery app are aiming at making it easy to fill your storeroom and refrigirator with your favorites food, vegetables and fruits whenever you need them. After selecting products through the Instacart app, personal shoppers review your order and do the in-store shopping and delivery for you.
+Instacart is challenging the data science community to use this anonymized data on customer orders over time to predict which previously purchased products will be in a user’s next order.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://danielabban.github.io/2017/08/wordcloud-on-president-nana-akufo-addo-inaugural-speech/">
+                <h3 class="media-heading">Word cloud on President Nana Akufo-Addo&#39;s Inaugural Speech</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">The graphical image below clearly shows the most frequent words used by our seating President - Nana Akufu-Addo during his inaugural speech on the 7th of January 2017
+The full speech can be found in the link below. I used an R package to scrape the speech from the web (myjoyonline.com) and wrote a function to create the word cloud. The full reproducible code can be found here
+url &lt;- &quot;http://www.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://danielabban.github.io/2017/08/data-visualization-insight-from-hr-data/">
+                <h3 class="media-heading">Visualizing Data from HR</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Most companies would love to keep their valuable employees for a very long period of time, unfortunately this is not the case. Many employees walk off the door with very short or no notice, surpervisors are also not able to quickly anticipate these actions to revert them.
+If employers can anticipate employees desire to leave, they would be better prepared to curb any negative outcome it would have on the company.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://danielabban.github.io/2017/04/predicting-the-success-of-bank-telemarketing/">
+                <h3 class="media-heading">Predicting the Success of Bank Telemarketing</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Introduction In this case study, we are going to explore the processes involved in a typical data mining task. When building a predictive model, there are some common problems you are likely to meet in your data - problems such as missing values, imbalanced classes, un-informative attributes and so on. Here we shall look at some proven techniques for dealing with such problems and many other important guidelines.
+We shall make an attempt to understand some functions that can make your life easier when working on projects in r</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://danielabban.github.io/2015/07/hello-r-markdown/">
+                <h3 class="media-heading">Hello R Markdown</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2015
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://danielabban.github.io/2015/05/elements-showcase/">
+                <h3 class="media-heading">Elements showcase</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2015
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Check out how Tranquilpeak theme display well HTML elements (title, paragraph, blockquote, table and more..). It&rsquo;s simple and elegant.
+</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://danielabban.github.io/2015/05/cover-image-showcase/">
+                <h3 class="media-heading">Cover image showcase</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2015
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="https://danielabban.github.io/post/">
+                <h3 class="media-heading">Posts</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         8 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://danielabban.github.io/images/cover.jpg');"></div>
+  
+
+
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js"></script>
+
+
+<script src="https://danielabban.github.io/js/script-wl33z0n6ocaypepiqrazthtivfrliqijej4rq8ek8gvrv1awftmgjuv8k4zc.min.js"></script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight').each(function(i, block) {
+    var code = "";
+    hljs.highlightAuto(block.innerText).value.split(/\r\n|\r|\n/).forEach(function(line) {
+      code += "<span class=\"line\">" + line + "</span><br>";
+    });
+    if (code.length > 0) {
+      block.innerHTML = code;  
+    }
+  });
+  $('pre > code').each(function(i, block) {
+    $(this).addClass('codeblock');
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = 'https:\/\/danielabban.github.io\/2017\/04\/predicting-the-success-of-bank-telemarketing\/';
+          
+            this.page.identifier = '\/2017\/04\/predicting-the-success-of-bank-telemarketing\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'https-danielabban-github-io';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+
+
+    
+  </body>
+</html>
+

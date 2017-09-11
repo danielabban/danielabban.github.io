@@ -21,5 +21,15 @@
 Instacart is challenging the data science community to use this anonymized data on customer orders over time to predict which previously purchased products will be in a user’s next order.</description>
     </item>
     
+    <item>
+      <title>Predicting the Success of Bank Telemarketing</title>
+      <link>https://danielabban.github.io/2017/04/predicting-the-success-of-bank-telemarketing/</link>
+      <pubDate>Tue, 11 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://danielabban.github.io/2017/04/predicting-the-success-of-bank-telemarketing/</guid>
+      <description>Introduction In this case study, we are going to explore the processes involved in a typical data mining task. When building a predictive model, there are some common problems you are likely to meet in your data - problems such as missing values, imbalanced classes, un-informative attributes and so on. Here we shall look at some proven techniques for dealing with such problems and many other important guidelines.
+We shall make an attempt to understand some functions that can make your life easier when working on projects in r</description>
+    </item>
+    
   </channel>
 </rss>

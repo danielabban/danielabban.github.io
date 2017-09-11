@@ -333,3 +333,6 @@ treemap(tmp3, index = c("department", "aisle"), vSize = "count2", title="",palet
 ```
 
 The size of the boxes signifies the number of products sold in each department
+
+This hopefully helps to understand the data more and we can smoothly move on to build our model. See you soon with some more cool data stuff!
+

@@ -18,6 +18,11 @@
   </url>
   
   <url>
+    <loc>https://danielabban.github.io/2017/04/predicting-the-success-of-bank-telemarketing/</loc>
+    <lastmod>2017-04-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://danielabban.github.io/2015/07/hello-r-markdown/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
   </url>
@@ -85,6 +90,12 @@
   </url>
   
   <url>
+    <loc>https://danielabban.github.io/categories/model/</loc>
+    <lastmod>2017-04-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://danielabban.github.io/tags/plot/</loc>
     <lastmod>2015-07-23T21:13:14-05:00</lastmod>
     <priority>0</priority>
@@ -97,14 +108,14 @@
   </url>
   
   <url>
-    <loc>https://danielabban.github.io/categories/r/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+    <loc>https://danielabban.github.io/tags/r/</loc>
+    <lastmod>2017-08-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://danielabban.github.io/tags/r/</loc>
-    <lastmod>2017-08-28T00:00:00+00:00</lastmod>
+    <loc>https://danielabban.github.io/categories/r/</loc>
+    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -133,13 +144,13 @@
   </url>
   
   <url>
-    <loc>https://danielabban.github.io/categories/visualization/</loc>
+    <loc>https://danielabban.github.io/tags/visualization/</loc>
     <lastmod>2017-08-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://danielabban.github.io/tags/visualization/</loc>
+    <loc>https://danielabban.github.io/categories/visualization/</loc>
     <lastmod>2017-08-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
